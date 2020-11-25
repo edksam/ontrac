@@ -4,12 +4,13 @@ import "./index.css";
 import PDtracker from "./components/PDtracker";
 import reportWebVitals from "./reportWebVitals";
 import StudentProfile from "./components/StudentProfile"
+import ViewProfile from "./components/ViewProfile"
 
 ReactDOM.render(
   <React.StrictMode>
    {/* <PDtracker /> */}
    <StudentProfile />
-    {/* <ViewProfile /> */}
+    <ViewProfile /> 
   </React.StrictMode>,
   document.getElementById("root"),
 );
