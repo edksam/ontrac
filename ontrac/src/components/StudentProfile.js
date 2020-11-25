@@ -1,52 +1,29 @@
 import React, { useState, useEffect } from "react";
-import {Table,Progress,Input } from 'antd'
-import ViewProfile from './ViewProfile'
-const StudentProfile=({id})=>{
-  const [studentProfile, setStudentProfile ] = useState(null)  
-id=2;
+import { Table, Progress, Input } from "antd";
+import ViewProfile from "./ViewProfile";
+const StudentProfile = ({ id }) => {
+  const [studentProfile, setStudentProfile] = useState(null);
+  id = 2;
   useEffect(() => {
     console.log("Fetching data from heroku");
 
-    fetch(
-      `https://ontrack-team3.herokuapp.com/profile/student/${id}`
-    )
+    fetch(`https://ontrack-team3.herokuapp.com/profile/student/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setStudentProfile([data]);
       });
   }, []);
-//      useEffect(() => {
-//     fetch(`url/${profile}`)
-//       .then(res => res.json())
-//       .then(data => {
-//         setNewProfile(data);
-//         console.log(data);
-//       });
-//   }, [profile]);
-// console.log(newProfile.assignment.reduce((acc,curr) => acc+curr,0)/newProfile.assignment.reduce((acc,curr) => {if(curr>0) { return acc++}; console.log(acc);},0))
-// console.log(newProfile.assignment.reduce((acc,curr) =>{if(curr>0) { return acc++}})
-// console.log(newProfile.assignment.reduce((acc,curr) => acc+curr,0))
-//const reducer = (acc,curr)=>acc + curr;
-
-
-  
   const columns = [
     {
       title: "Student_id",
       dataIndex: "student_id",
       key: "student_id",
-     // render: (text) => <a href="http://google.co.uk">{text}</a>,
     },
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
     },
-    // {
-    //   title: "assignment",
-    //   dataIndex: "assignment",
-    //   key: "assignment",
-    // },
     {
       title: "Attendance",
       key: "attendance",
@@ -54,13 +31,16 @@ id=2;
       render: (attendance) => (
         <>
           {attendance.map((element) => {
-            return (          
-              
-                <Progress type="circle" strokeColor={{
-        '0%': '#108ee9',
-        '100%': '#87d068',
-      }} percent={element} width={80} />
-              
+            return (
+              <Progress
+                type="circle"
+                strokeColor={{
+                  "0%": "#108ee9",
+                  "100%": "#87d068",
+                }}
+                percent={element}
+                width={80}
+              />
             );
           })}
         </>
@@ -74,37 +54,44 @@ id=2;
       render: (assignment) => (
         <>
           {assignment.map((element) => {
-            
-            
-            return (          
-              
-                <Progress type="circle" strokeColor={{
-        '0%': '#108ee9',
-        '50%': 'amber',
-        '100%': '#87d068',
-      }} percent={(element*10).toFixed(2)} width={80} />
-              
+            return (
+              <Progress
+                type="circle"
+                strokeColor={{
+                  "0%": "#108ee9",
+                  "50%": "amber",
+                  "100%": "#87d068",
+                }}
+                percent={(element * 10).toFixed(2)}
+                width={80}
+              />
             );
           })}
         </>
       ),
     },
     {
+      title: "Assignments Missing",
+      dataIndex: "assignments_missing",
+      key: "assignments_missing",
+    },
+    {
+      title: "Class_Late",
+      dataIndex: "class_late",
+      key: "class_late",
+    },
+    {
       title: "email",
       dataIndex: "email",
       key: "email",
-    },
-    
+    }
   ];
   return <Table columns={columns} dataSource={studentProfile} />;
 };
- 
+
 //return <TextArea rows={4} />;
 
-  
-
- // };
-
+// };
 
 //     if (newProfile) {
 //     return (
@@ -122,5 +109,5 @@ id=2;
 
 // }
 //  return null;
- //};
+//};
 export default StudentProfile;
