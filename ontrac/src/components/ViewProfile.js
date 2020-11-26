@@ -1,5 +1,4 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './viewprofile.css';
 import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';

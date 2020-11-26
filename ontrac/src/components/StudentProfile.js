@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Table, Progress, Input } from "antd";
-import ViewProfile from "./ViewProfile";
 const StudentProfile = ({ id }) => {
   const [studentProfile, setStudentProfile] = useState(null);
   id = 2;
@@ -69,6 +68,21 @@ const StudentProfile = ({ id }) => {
           })}
         </>
       ),
+      // render:(
+      //   <>        
+      //         <Progress
+      //           type="circle"
+      //           strokeColor={{
+      //             "0%": "#108ee9",
+      //             "50%": "amber",
+      //             "100%": "#87d068",
+      //           }}
+      //           percent={("assignment" * 10).toFixed(2)}
+      //           width={80}
+      //         />
+          
+      //   </>
+      // ),
     },
     {
       title: "Assignments Missing",
@@ -84,7 +98,7 @@ const StudentProfile = ({ id }) => {
       title: "email",
       dataIndex: "email",
       key: "email",
-    }
+    },
   ];
   return <Table columns={columns} dataSource={studentProfile} />;
 };

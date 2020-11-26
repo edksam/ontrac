@@ -1,18 +1,17 @@
 import React from 'react'
 import Data from './Data.json'
 import './main.css'
-import StudentProfile from './component/StudentProfile'
 import "antd/dist/antd.css";
 import "./index.css";
-import ViewProfile from './component/ViewProfile';
+
 function main(){
     return(
         <div id="container">
         <Header />
         <hr></hr>
         {/* <Main /> */}
-        <StudentProfile />
-         <ViewProfile />
+        {/* <StudentProfile />
+         <ViewProfile /> */}
       
        
         <hr></hr>
