@@ -7,8 +7,8 @@ import StudentProfile from "./components/StudentProfile"
 
 ReactDOM.render(
   <React.StrictMode>
-   {/* <PDtracker /> */}
-   <StudentProfile />
+   <PDtracker />
+   {/* <StudentProfile /> */}
     {/* <ViewProfile /> */}
   </React.StrictMode>,
   document.getElementById("root"),
