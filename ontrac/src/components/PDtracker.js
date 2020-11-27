@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Table, Tag, Space } from "antd";
 import "antd/dist/antd.css";
 import "../index.css";
+// import "../main.css";
 import useStudentsData from "./useStudentsData";
 // import pd-fake-data.json from "./pd-fake-data.json"
 
@@ -57,26 +58,7 @@ const PDTracker = () => {
         </>
       ),
     },
-    // {
-    //   title: "Progress",
-    //   key: "progress",
-    //   dataIndex: "progress",
-    //   render: (progress) => (
-    //     <>
-    //       {progress.map((prog) => {
-    //         let color = prog === "excellent" ? "geekblue" : "green";
-    //         if (prog === "struggling") {
-    //           color = "red";
-    //         }
-    //         return (
-    //           <Tag color={color} key={prog}>
-    //             {prog.toUpperCase()}
-    //           </Tag>
-    //         );
-    //       })}
-    //     </>
-    //   ),
-    // },
+
     {
       title: "Action",
       key: "action",

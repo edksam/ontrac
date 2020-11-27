@@ -1,17 +1,17 @@
 import React from 'react';
-import Main from './component/main'
+import Main from './components/main'
 import ReactDOM from 'react-dom';
-import './index.css';
 import './main.css'
-
-
+import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
+import PDTracker from './components/PDtracker';
 
 ReactDOM.render(
- 
+
   <React.StrictMode>
     <Main />
+    {/* <PDTracker/> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
