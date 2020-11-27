@@ -1,64 +1,52 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState} from 'react';
 function Container(){
-     //https://zubeda-hotel-server.glitch.me/bookings/1
-    // https://ontrack-team3.herokuapp.com/students
-    //https://progresstracer.glitch.me/students
-    // https://ontrack-team3.herokuapp.com/students
-    //const [urlMain,setURLMain]=useState('https://ontrack-team3.herokuapp.com/students')
     const [urlSearch,setURLSearch]=useState(null)
    
-    //////////function to addChange ApI according to search cretria
+    ///function to addChange API according to search criteria
     function urlFunc(urlSearch){
-        document.getElementById("main").innerHTML=""
-        setURLSearch(urlSearch)
-        
+        document.getElementById("main").innerHTML="";
+        setURLSearch(urlSearch);   
     }
     
-    /////////////////////////this function is used to make refresh data after new entry
-    const [addChange,setChange]=useState(null)
+    //this function is used to refresh data after new entry
+    const [addChange,setChange]=useState(null);
     const [load,setLoad]=useState(null);
     function addFreshFunc(addChange){
-        //alert("thanks.your data is updated now")
-        alert("ORIGINFRESHFUNG")
-        document.getElementById("main").innerHTML=""
-        setChange(addChange)
-        setLoad('https://ontrack-team3.herokuapp.com/students')
+        document.getElementById("main").innerHTML="";
+        setChange(addChange);
+        setLoad('https://ontrack-team3.herokuapp.com/students');
     }
-     /////////////////////////this function is used to make refresh data after delete a record
-    // const [load,setLoad]=useState(null);
-     
-   
-    
+
     return(
         <div id="container">
-        <Header urlFunc={urlFunc} />
-        <hr></hr>
-        <Main url='https://ontrack-team3.herokuapp.com/students' cnt='https://ontrack-team3.herokuapp.com/students' urlFunc={urlFunc} addFreshFunc={addFreshFunc} />
-        {urlSearch && (<Main url={urlSearch} cnt={urlSearch} urlFunc={urlFunc} addFreshFunc={addFreshFunc} />)}
-        {addChange && (<Main url={load} cnt={addChange} urlFunc={urlFunc} addFreshFunc={addFreshFunc}  /> )}
+            <Header urlFunc={urlFunc} />
+            <hr></hr>
+            <Main url='https://ontrack-team3.herokuapp.com/students' cnt='https://ontrack-team3.herokuapp.com/students' urlFunc={urlFunc} addFreshFunc={addFreshFunc} />
+            {urlSearch && (<Main url={urlSearch} cnt={urlSearch} urlFunc={urlFunc} addFreshFunc={addFreshFunc} />)}
+            {addChange && (<Main url={load} cnt={addChange} urlFunc={urlFunc} addFreshFunc={addFreshFunc}  /> )}
 
-        <hr></hr>
-        <Footer />
+            <hr></hr>
+            <Footer />
         </div>
     )
 }
-/////////////////////////////////////////////component header
+
+//component header
 function Header(prop){
     const [searchLocation,setSearchLocation]=useState("");
     const [searchClass,setSearchClass]=useState("");
     const [searchName,setSearchName]=useState("");
     
-    
-//////////////////this function is used for search against location class and terms(name,buddy)
+    //this function is used to search against location, class and terms(name, buddy)
     function search(){
        let query;
-       if(searchLocation==="locaton"){
-           searchLocation("")
+       if(searchLocation==="location"){
+           searchLocation("");
        }
-        query=`https://ontrack-team3.herokuapp.com/students/search?location=${searchLocation}&className=${searchClass}&term=${searchName}` 
+        query=`https://ontrack-team3.herokuapp.com/students/search?location=${searchLocation}&className=${searchClass}&term=${searchName}`;
         prop.urlFunc(query);
-
     }
+
     return(
         <header id="header">
             <div id="logo">
@@ -92,39 +80,34 @@ function Header(prop){
                         </select>
                         </li>
                         <li>
-                            {/* <form class="form-inline my-2 my-lg-0" name="frmSearch"> */}
-                                <div style={{display:'flex'}}>
+                            <div style={{display:'flex'}}>
 
-                                    <input onChange={function(e){setSearchName(e.target.value)}} name="txtTerm" id="txtName" style={{fontSize:'1.4rem',width:'10rem'}} class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                                    <button style={{fontSize:'1.4rem'}} class="btn btn-outline-success my-2 my-sm-0"  id="btnSearch" onClick={search}>Search</button>
-                                </div>
-                                
-                            {/* </form> */}
+                                <input onChange={function(e){setSearchName(e.target.value)}} name="txtTerm" id="txtName" style={{fontSize:'1.4rem',width:'10rem'}} class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                                <button style={{fontSize:'1.4rem'}} class="btn btn-outline-success my-2 my-sm-0"  id="btnSearch" onClick={search}>Search</button>
+                            </div>
                         </li>
-                </div>
-            </div>   
+                    </div>
+                </div>   
             <div>
                 <button type="button" class="btn btn-primary" id="login">Login</button>
             </div>
         </header>
     )
-    
 }
-/////////////////////////////////////////////component Main
+
+//component Main
 function Main(prop){
-    ///////////////this function is used to edit a record
+    //this function is used to edit a record
     const [edit,setEdit]=useState(null);
     function editFunc(e){
         let editId=e.target.parentNode.parentNode.id;
-            setEdit(editId);
-       
+        setEdit(editId);       
     }
-    ////////////////following method is used to remove component edit
+    // the following method is used to remove component edit
     function editCancelFunc(){
-        //editCancelFunc
         setEdit(null);
     }
-    ////following function is used to delete a record
+    //following function is used to delete a record
     function delFunc(e){
         let id=e.target.parentNode.parentNode.id;
         let del=Math.random(101,200);
@@ -132,17 +115,15 @@ function Main(prop){
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
-                }
-            
+            }            
         };
-        var proceed = window.confirm("Are you sure?\nPress Ok to delete the record or press Cancel to finish?");
+        var proceed = window.confirm("Are you sure?\nPress OK to delete the record or press Cancel to finish?");
         if (proceed) {
             fetch(`https://ontrack-team3.herokuapp.com/students/${id}`, requestDel) 
-            prop.addFreshFunc(del);
-           
+            prop.addFreshFunc(del);           
         } 
     }
-    ////////////API to extract al  students records on main page load
+    // API to extract all student records on main page
     const [data,setData]=useState([]);
     useEffect(
         function(){
@@ -153,148 +134,144 @@ function Main(prop){
                 return obj.json();
             })
             .then(function(db){
-            
-                //console.log(db);
                 setData(db);
-                //console.log(data);
             })
             .then(function(error) {
                 console.log(error);
             });
         }
     ,[prop.cnt,prop])
-////////////////////setAdd method is used to on/off the new entry div
+
+// setAdd method is used to turn on/off the new entry div
 const [add,setAdd]=useState(null);
 
-////////////following method is used to on off adButton
+// the following method is used to turn on / off addButton
 function addCancelFunc(){
      if(add===null){
         setAdd("add");
-        document.getElementById("addNew").textContent="X"
+        document.getElementById("addNew").textContent="X";
         document.getElementById("addNew").style.backgroundColor="red";
-    }
-    else{
-        setAdd(null)
-        document.getElementById("addNew").textContent="AddNew"
+    } else {
+        setAdd(null);
+        document.getElementById("addNew").textContent="AddNew";
         document.getElementById("addNew").style.backgroundColor="green";
     }
 }
 return(
 <main id="main">
-    {/* following button is used to block the addNew component */}
     <div id="frmAdd">
         <button type="button" class="btn btn-success" id="addNew" onClick={addCancelFunc}>Add New</button>                      
     </div>
-   {/* call AddNew component for new entry*/}
     {add && (<AddNew addCancelFunc={addCancelFunc} addFreshFunc={prop.addFreshFunc}/>)}
     {edit && (<Edit addFreshFunc={prop.addFreshFunc} editId={edit} editCancelFunc={editCancelFunc}/>)}
     <table class="table table-striped table-bordered" >
-    <caption>List of users</caption>
-    <thead>
-        <tr>
-        <th scope="col" style={{fontSize:'1.2rem'}}>#</th>
-        <th scope="col" style={{fontSize:'1.2rem'}} >Name</th>
-        <th scope="col" style={{fontSize:'1.2rem'}}>Photo</th>
-        <th scope="col" style={{fontSize:'1.2rem'}}>Edu Buddy</th>
-        <th scope="col" style={{fontSize:'1.2rem'}}>PD Buddy</th>
-        <th scope="col" style={{fontSize:'1.2rem'}}>GitHub</th>
-        <th scope="col" style={{fontSize:'1.2rem'}}>English Test</th>
-        <th scope="col" style={{fontSize:'1.2rem'}}>Language Support</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-    {
-    
-    data.map(function(obj){
-        return(<>
-            <tr id={obj.id} key={obj.id}>
-                <th scope="row" key={obj.id} value={obj.id}>{obj.id}</th>
-                <td style={{fontSize:'1.2rem'}} value={obj.name}>{obj.name}</td>
-                <td style={{fontSize:'1.2rem'}} value={obj.photo}>{obj.photo}</td>
-                <td style={{fontSize:'1.2rem'}} value={obj.pdBuddy}>{obj.pdBuddy}</td>
-                <td value={obj.eduBuddy}>{obj.eduBuddy}</td>
-                <td style={{fontSize:'1.2rem'}} value={obj.gitHub}>{obj.gitHub}</td>
-                <td style={{fontSize:'1.2rem'}} value={obj.englishTest}>{obj.englishTest}</td>
-                <td style={{fontSize:'1.2rem'}} value={obj.languageSupport}>{obj.languageSupport}</td>
-                <td id="tdEdit">
-                    <button style={{fontSize:'1.2rem'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnEdit" onClick={editFunc}>Edit</button>
-                </td>
-                <td id="tdDel">
-                    <button  style={{fontSize:'1.2rem',borderColor:'red'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btDel" onClick={delFunc}>X</button>
-                    
-                </td>
-                <td>
-                    <button style={{fontSize:'1.2rem'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnProfile">Profile</button>
-                </td>
+        <caption>List of users</caption>
+        <thead>
+            <tr>
+                <th scope="col" style={{fontSize:'1.2rem'}}>#</th>
+                <th scope="col" style={{fontSize:'1.2rem'}} >Name</th>
+                <th scope="col" style={{fontSize:'1.2rem'}}>Photo</th>
+                <th scope="col" style={{fontSize:'1.2rem'}}>Edu Buddy</th>
+                <th scope="col" style={{fontSize:'1.2rem'}}>PD Buddy</th>
+                <th scope="col" style={{fontSize:'1.2rem'}}>GitHub</th>
+                <th scope="col" style={{fontSize:'1.2rem'}}>English Test</th>
+                <th scope="col" style={{fontSize:'1.2rem'}}>Language Support</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
-        </>)
-    })
-    }
-    </tbody>
+        </thead>
+        <tbody>
+            {data.map(function(obj){
+                return(
+                    <>
+                        <tr id={obj.id} key={obj.id}>
+                            <th scope="row" key={obj.id} value={obj.id}>{obj.id}</th>
+                            <td style={{fontSize:'1.2rem'}} value={obj.name}>{obj.name}</td>
+                            <td style={{fontSize:'1.2rem'}} value={obj.photo}>{obj.photo}</td>
+                            <td style={{fontSize:'1.2rem'}} value={obj.pdBuddy}>{obj.pdBuddy}</td>
+                            <td value={obj.eduBuddy}>{obj.eduBuddy}</td>
+                            <td style={{fontSize:'1.2rem'}} value={obj.gitHub}>{obj.gitHub}</td>
+                            <td style={{fontSize:'1.2rem'}} value={obj.englishTest}>{obj.englishTest}</td>
+                            <td style={{fontSize:'1.2rem'}} value={obj.languageSupport}>{obj.languageSupport}</td>
+                            <td id="tdEdit">
+                                <button style={{fontSize:'1.2rem'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnEdit" onClick={editFunc}>Edit</button>
+                            </td>
+                            <td id="tdDel">
+                                <button  style={{fontSize:'1.2rem',borderColor:'red'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btDel" onClick={delFunc}>X</button>
+                                
+                            </td>
+                            <td>
+                                <button style={{fontSize:'1.2rem'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnProfile">Profile</button>
+                            </td>
+                        </tr>
+                    </>
+                )
+            })
+            }
+        </tbody>
     </table>
 </main>
 )
 }
-/////////////////////////////////////////////////////component addNew
+
+//component addNew
 function AddNew(prop){
-    const [name,setName]=useState(null)
-    const [photo,setPhoto]=useState("yes")
-    const [edu,setEdu]=useState(null)
-    const [pd,setPD]=useState(null)
-    const [gitHub,setGitHub]=useState(null)
-    const [english,setEnglish]=useState("Excellent")
-    const [languageSupport,setLanuageSupport]=useState("Yes")
+    const [name,setName]=useState(null);
+    const [photo,setPhoto]=useState("yes");
+    const [edu,setEdu]=useState(null);
+    const [pd,setPD]=useState(null);
+    const [gitHub,setGitHub]=useState(null);
+    const [english,setEnglish]=useState("Excellent");
+    const [languageSupport,setLanuageSupport]=useState("Yes");
     const [location,setLocation]=useState(null);
     const [className,setClassName]=useState(null);
     const addChange=Math.random(100);
-     //following method is used to validate forn
+
+    // the following method is used to validate form
     function validate(){
      
         if(name===null){
-            alert("Enter the name please")
-            return false
+            alert("Enter the name please");
+            return false;
         }
         if(className===null){
-            alert("Enter class name please")
-            return false
+            alert("Enter class name please");
+            return false;
         }
         if(location===null){
-            alert("Enter location  please")
-            return false
+            alert("Enter location please");
+            return false;
         }
         if(edu===null){
-            alert("Enter the Education Buddy please")
-            return false
+            alert("Enter the Education Buddy please");
+            return false;
         }
         if(pd===null){
-            alert("Enter the personal development buddy")
-            return false
+            alert("Enter the personal development buddy");
+            return false;
         }
         if(gitHub===null){
-            alert("Enter github id please")
-            return false
-        }
-       
+            alert("Enter github id please");
+            return false;
+        }       
         return true;
     }
-    //following method is used to send new entry to server
-    const post = () => {
-      
+
+    // following method is used to send new entry to server
+    const post = () => {      
        
         if(validate()){
             let student = {
                 name: name,
-                photo:photo,
-                pdBuddy:pd,
-                eduBuddy:edu,
-                location:location,
-                className:className,
-                gitHub:gitHub,
-                englishTest:english,
-                languageSupport:languageSupport
+                photo: photo,
+                pdBuddy: pd,
+                eduBuddy: edu,
+                location: location,
+                className: className,
+                gitHub: gitHub,
+                englishTest: english,
+                languageSupport: languageSupport
             };
           
             const requestPost = {
@@ -304,31 +281,29 @@ function AddNew(prop){
                 },
                 body: JSON.stringify(student)
             };
-            fetch("https://ontrack-team3.herokuapp.com/students", requestPost)
-            var proceed = window.confirm("Saved:Press Ok if You like to add more or press Cancel to finish?");
+
+            fetch("https://ontrack-team3.herokuapp.com/students", requestPost);
+            var proceed = window.confirm("Saved: Press OK if You like to add more or press Cancel to finish?");
             if (proceed) {
-                setName("")
+                setName("");
                 setEdu("");
                 setPD("") ;
                 setGitHub(""); 
-                setLocation("")
-                setClassName("")
-                //prop.urlFunc('https://ontrack-team3.herokuapp.com/students') 
+                setLocation("");
+                setClassName("");
                 prop.addFreshFunc(addChange)
-                //prop.addCancelFunc('https://ontrack-team3.herokuapp.com/students'); 
             } else {
                prop.addCancelFunc('https://ontrack-team3.herokuapp.com/students');
             }
         }
     }
+
     //following method is used to send msg to component main to hide the this component
-   
     return(
         <div id="newEntry">
             <table class="table table-striped table-bordered" >
                 <thead>
-                    <tr>
-                     
+                    <tr>                     
                         <th scope="col" style={{fontSize:'1.2rem'}}>Name</th>
                         <th scope="col" style={{fontSize:'1.2rem'}}>Photo</th>
                         <th scope="col" style={{fontSize:'1.2rem'}}>Class</th>
@@ -341,8 +316,8 @@ function AddNew(prop){
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
-                    </thead>  
-                    <tbody>
+                </thead>  
+                <tbody>
                     <tr>
                         <td style={{fontSize:'1.2rem'}}><input style={{width:'15rem'}} placeholder="Enter Name" type="text" name="txtName" id="txtName" value={name} onChange={function(e){setName(e.target.value)}} /></td>
                         <td style={{fontSize:'1.2rem'}}>
@@ -353,7 +328,6 @@ function AddNew(prop){
                         </td>
                         <td style={{fontSize:'1.2rem'}}><input style={{width:'10rem'}} placeholder="Enter Class" type="text" name="txtClassName" id="txtClassName" value={className} onChange={function(e){setClassName(e.target.value)}} /></td>
                         <td style={{fontSize:'1.2rem'}}><input style={{width:'10rem'}} placeholder="Enter Location" type="text" name="txtLocation" id="txtLocation" value={location} onChange={function(e){setLocation(e.target.value)}} /></td>
-
                         <td style={{fontSize:'1.2rem'}}><input style={{width:'10rem'}} type="text" placeholder="Enter Edu Buddy" name="txtEdu" value={edu} onChange={function(e){setEdu(e.target.value)}} /></td>
                         <td><input style={{width:'10rem'}} type="text" name="txtPD" value={pd} placeholder="Enter PD Buddy" onChange={function(e){setPD(e.target.value)}} /></td>
                         <td style={{fontSize:'1.2rem'}}><input type="text" name="txtGitHub" placeholder="Enter GitHub ID" value={gitHub} onChange={function(e){setGitHub(e.target.value) }} /></td>
@@ -370,87 +344,85 @@ function AddNew(prop){
                                 <option style={{fontSize:'1.2rem'}} value="No">No</option>
                             </select>
                         </td>
-                        <td>
-                            {/* <form method="post" action="https://progresstracker.glitch.me/students" class="form-inline my-2 my-lg-0" name="frmProfile"> */}
-                                
-                                <button style={{fontSize:'1.2rem'}} class="btn btn-success my-2 my-sm-0" onClick={post} id="btnSave">Save</button>
-                            
-                        </td>
-                        
+                        <td>                           
+                            <button style={{fontSize:'1.2rem'}} class="btn btn-success my-2 my-sm-0" onClick={post} id="btnSave">Save</button>
+                        </td>                        
                     </tr>
-                    </tbody>
+                </tbody>
             </table>
            <hr></hr> 
         </div>
     )
 }
-//////////////////////////////////////////edit component
+
+//edit component
 function Edit(prop){
-///////////////////////////////////
-const [name,setName]=useState(null)
-const [photo,setPhoto]=useState("yes")
-const [edu,setEdu]=useState(null)
-const [pd,setPD]=useState(null)
-const [gitHub,setGitHub]=useState(null)
-const [english,setEnglish]=useState("Excellent")
-const [languageSupport,setLanuageSupport]=useState("Yes")
-const [location,setLocation]=useState(null);
-const [className,setClassName]=useState(null);
-let editChange=Math.random(300,400);
- //following method is used to validate forn
-function validate(){
- 
-    if(name===null){
-        alert("Enter the name please")
-        return false
+    const [name,setName]=useState(null);
+    const [photo,setPhoto]=useState("yes");
+    const [edu,setEdu]=useState(null);
+    const [pd,setPD]=useState(null);
+    const [gitHub,setGitHub]=useState(null);
+    const [english,setEnglish]=useState("Excellent");
+    const [languageSupport,setLanuageSupport]=useState("Yes");
+    const [location,setLocation]=useState(null);
+    const [className,setClassName]=useState(null);
+    let editChange=Math.random(300,400);
+
+    //following method is used to validate form
+    function validate(){
+    
+        if(name===null){
+            alert("Enter the name please");
+            return false;
+        }
+        if(className===null){
+            alert("Enter class name please");
+            return false;
+        }
+        if(location===null){
+            alert("Enter location  please");
+            return false;
+        }
+        if(edu===null){
+            alert("Enter the Education Buddy please");
+            return false;
+        }
+        if(pd===null){
+            alert("Enter the personal development buddy");
+            return false;
+        }
+        if(gitHub===null){
+            alert("Enter github id please");
+            return false;
+        }
+    
+        return true;
     }
-    if(className===null){
-        alert("Enter class name please")
-        return false
-    }
-    if(location===null){
-        alert("Enter location  please")
-        return false
-    }
-    if(edu===null){
-        alert("Enter the Education Buddy please")
-        return false
-    }
-    if(pd===null){
-        alert("Enter the personal development buddy")
-        return false
-    }
-    if(gitHub===null){
-        alert("Enter github id please")
-        return false
-    }
-   
-    return true;
-}
-//following method is used to send new entry to server
-const edit = () => {
+    
+    //following method is used to send new entry to server
+    const edit = () => {
   
-   alert(prop.editId)
-    if(validate()){
-        let student = {
-            name: name,
-            photo:photo,
-            pdBuddy:pd,
-            eduBuddy:edu,
-            location:location,
-            className:className,
-            gitHub:gitHub,
-            englishTest:english,
-            languageSupport:languageSupport
-        };
-      
-        const requestEdit = {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(student)
-        };
+        alert(prop.editId)
+        if(validate()){
+            let student = {
+                name: name,
+                photo:photo,
+                pdBuddy:pd,
+                eduBuddy:edu,
+                location:location,
+                className:className,
+                gitHub:gitHub,
+                englishTest:english,
+                languageSupport:languageSupport
+            };
+        
+            const requestEdit = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(student)
+            };
         var proceed = window.confirm("Saved:Press Ok if You like to add more or press Cancel to finish?");
         if (proceed) {
             fetch(`https://ontrack-team3.herokuapp.com/students/${prop.editId}`, requestEdit)
@@ -461,23 +433,20 @@ const edit = () => {
             setGitHub(""); 
             setLocation("")
             setClassName("")
-          //addFreshFunc={prop.addFreshFunc} editId={edit} editCancelFunc={editCancelFunc}
          
-          prop.editCancelFunc();
-          alert(editChange)
-          prop.addFreshFunc(editChange)
-            //prop.addCancelFunc('https://ontrack-team3.herokuapp.com/students'); 
+            prop.editCancelFunc();
+            alert(editChange)
+            prop.addFreshFunc(editChange)
         } 
     }
 }
-//following method is used to send msg to component main to hide the this component
 
+// the following method is used to send msg to component main to hide this component
 return(
     <div id="edit">
         <table class="table table-striped table-bordered" >
             <thead>
-                <tr>
-                 
+                <tr>                 
                     <th scope="col" style={{fontSize:'1.2rem'}}>Name</th>
                     <th scope="col" style={{fontSize:'1.2rem'}}>Photo</th>
                     <th scope="col" style={{fontSize:'1.2rem'}}>Class</th>
@@ -490,8 +459,8 @@ return(
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
-                </thead>  
-                <tbody>
+            </thead>  
+            <tbody>
                 <tr>
                     <td style={{fontSize:'1.2rem'}}><input style={{width:'15rem'}} placeholder="Enter Name" type="text" name="txtName" id="txtName" value={document.getElementById(prop.editId).children[1].textContent} onChange={function(e){setName(e.target.value)}} /></td>
                     <td style={{fontSize:'1.2rem'}}>
@@ -520,21 +489,20 @@ return(
                         </select>
                     </td>
                     <td>
-                            <button style={{fontSize:'1.2rem'}} class="btn btn-success my-2 my-sm-0" onClick={edit} id="btnSave">Save</button>
+                        <button style={{fontSize:'1.2rem'}} class="btn btn-success my-2 my-sm-0" onClick={edit} id="btnSave">Save</button>
                     </td>
                     <td>
                         <button  style={{fontSize:'1.2rem',color:'white',borderColor:'red',backgroundColor:'red',display:'flex'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnCancel" onClick={prop.editCancelFunc}>X</button>
-                    </td>
-                    
+                    </td>                    
                 </tr>
-                </tbody>
+            </tbody>
         </table>
-       <hr></hr> 
+        <hr></hr> 
     </div>
-)
-///////////////////////////////// 
+    )
 }
-/////////////////////////////////////////////////////////component footer
+
+//component footer
 function Footer(){
     return( <footer id="footer">
         <a href="www.google.com">Contact cyf</a>
@@ -543,4 +511,5 @@ function Footer(){
     </footer>
     )
 }
+
 export default Container;
