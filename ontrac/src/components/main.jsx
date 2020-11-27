@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import PDtracker from "./PDtracker";
 import "antd/dist/antd.css";
+import "./main.css"
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import StudentProfile from "./StudentProfile"
 
 function Container() {
   //https://zubeda-hotel-server.glitch.me/bookings/1
@@ -30,11 +32,18 @@ function Container() {
   }
   /////////////////////////this function is used to make refresh data after delete a record
   // const [load,setLoad]=useState(null);
-
+//   const [profile, setProfile] = useState(false)
+//  function handler(){
+//   setProfile(true)    
+//  }
   return (
     <div id="container">
       <Header urlFunc={urlFunc} />
       <hr></hr>
+      {/* if(profile){
+         <StudentProfile />
+      } */}
+      {/* <StudentProfile /> */}
       <Main
         url="https://ontrack-team3.herokuapp.com/students"
         cnt="https://ontrack-team3.herokuapp.com/students"
@@ -245,6 +254,8 @@ function Main(prop) {
 
   ////////////following method is used to on off adButton
   function addCancelFunc() {
+
+    
     if (add === null) {
       setAdd("add");
       document.getElementById("addNew").textContent = "X";
@@ -255,10 +266,10 @@ function Main(prop) {
       document.getElementById("addNew").style.backgroundColor = "green";
     }
   }
+  //
   return (
-    <main id="main">
-      {/* following button is used to block the addNew component */}
-      <div id="frmAdd">
+      <main id="main">
+        <div id="frmAdd">
         <button
           type="button"
           class="btn btn-success"
@@ -370,6 +381,8 @@ function Main(prop) {
                   <td>
                     <a href="./component/StudentProfile.jsx">
                       <button
+
+                      onClick = {handler}
                         style={{ fontSize: "1.2rem" }}
                         class="btn btn-outline-success my-2 my-sm-0"
                         type="submit"

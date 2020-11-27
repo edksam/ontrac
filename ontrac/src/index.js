@@ -3,16 +3,20 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import StudentProfile from "./components/StudentProfile"
+import {InputForm} from "./components/InputForm";
 import ViewProfile from "./components/ViewProfile"
+import "bootstrap/dist/css/bootstrap.min.css";
+// import main from "./components/main.jsx"
+// import Container from "./components/main.jsx";
+
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <PDtracker /> */}
-    
-    
+    {/* <Container /> */}
     <StudentProfile />
+    <InputForm />
     <ViewProfile />
-    
   </React.StrictMode>,
   document.getElementById("root")
 );
