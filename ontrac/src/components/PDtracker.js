@@ -18,7 +18,7 @@ const PDTracker = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a href="http://google.co.uk">{text}</a>, // DO WE NEED THIS COMMA?
+      render: (text) => <a href="http://google.co.uk">{text}</a>, // DO WE NEED THIS COMMA? WHY GOOGLE?
     },
     {
       title: "Communication",
