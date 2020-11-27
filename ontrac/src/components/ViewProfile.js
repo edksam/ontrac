@@ -1,5 +1,5 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom'; // DO WE NEED THIS OR CAN WE REMOVE?
 import 'antd/dist/antd.css';
 import './viewprofile.css';
 import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
@@ -25,7 +25,8 @@ class ViewProfile extends React.Component {
       visible: false,
     });
   };
-
+// DO WE NEED <> AND </> ON LINES 31 AND 150 OR CAN WE REMOVE?
+// CAN WE REMOVE LINES 116-118?
   render() {
     return (
       <>
