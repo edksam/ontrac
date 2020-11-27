@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Table,Progress,Input } from 'antd'
-import ViewProfile from './ViewProfile'
+import ViewProfile from './ViewProfile' // DOES THIS DO ANYTHING AS THE COLOUR LOOKS FAINT?
 const StudentProfile=({id})=>{
   const [studentProfile, setStudentProfile ] = useState(null)  
 id=2;
@@ -14,7 +14,7 @@ id=2;
       .then((data) => {
         setStudentProfile([data]);
       });
-  }, []);
+  }, []); // DO WE NEED BELOW COMMENT OR CAN WE REMOVE?
 //      useEffect(() => {
 //     fetch(`url/${profile}`)
 //       .then(res => res.json())
@@ -35,18 +35,18 @@ id=2;
       title: "Student_id",
       dataIndex: "student_id",
       key: "student_id",
-     // render: (text) => <a href="http://google.co.uk">{text}</a>,
+     // render: (text) => <a href="http://google.co.uk">{text}</a>, // DO WE NEED THIS COMMENT?
     },
     {
       title: "Name",
       dataIndex: "name",
-      key: "name",
-    },
+      key: "name", // DO WE NEED THIS COMMA?
+    }, // DO WE NEED BELOW COMMENT?
     // {
     //   title: "assignment",
     //   dataIndex: "assignment",
     //   key: "assignment",
-    // },
+    // }, // DO WE NEED <> AND </> ON LINES 55 AND 66?
     {
       title: "Attendance",
       key: "attendance",
@@ -64,13 +64,13 @@ id=2;
             );
           })}
         </>
-      ),
+      ), // DO WE NEED THIS COMMA?
     },
     {
       title: "Assignment",
       dataIndex: "assignment",
       key: "assignment",
-
+// DO WE NEED <> AND </> ON LINES 75 AND 89?
       render: (assignment) => (
         <>
           {assignment.map((element) => {
@@ -87,18 +87,18 @@ id=2;
             );
           })}
         </>
-      ),
+      ), // DO WE NEED TO COMMA?
     },
     {
       title: "email",
       dataIndex: "email",
-      key: "email",
-    },
+      key: "email", // DO WE NEED TO COMMA?
+    }, // DO WE NEED TO COMMA?
     
   ];
   return <Table columns={columns} dataSource={studentProfile} />;
 };
- 
+ // DO WE NEED TO KEEP BELOW CODE WHICH IS COMMENTED OUT?
 //return <TextArea rows={4} />;
 
   
