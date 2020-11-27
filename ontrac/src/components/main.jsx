@@ -267,7 +267,20 @@ function Main(prop) {
     }
   }
   //
-  return (
+  const [showProfile, setShowProfile] = useState(false);
+  const [showProfileId, setShowProfileId] = useState("");
+function profileHandler(e){
+  setShowProfile(!showProfile) 
+   let editId = e.target.parentNode.parentNode.id;
+    setShowProfileId(editId);
+
+}
+if(showProfile){
+  return (<StudentProfile id={showProfileId } setShowProfile={setShowProfile} />);
+   
+}
+else
+{  return (
       <main id="main">
         <div id="frmAdd">
         <button
@@ -379,10 +392,10 @@ function Main(prop) {
                     </button>
                   </td>
                   <td>
-                    <a href="./component/StudentProfile.jsx">
+                    {/* <a href="./components/StudentProfile.jsx"> */}
                       <button
 
-                      onClick = {handler}
+                      onClick = {profileHandler}
                         style={{ fontSize: "1.2rem" }}
                         class="btn btn-outline-success my-2 my-sm-0"
                         type="submit"
@@ -390,7 +403,7 @@ function Main(prop) {
                       >
                         Profile
                       </button>
-                    </a>
+                    {/* </a> */}
                   </td>
                 </tr>
               </>
@@ -399,7 +412,7 @@ function Main(prop) {
         </tbody>
       </table>
     </main>
-  );
+  );}
 }
 /////////////////////////////////////////////////////component addNew
 function AddNew(prop) {
@@ -969,9 +982,9 @@ function Edit(prop) {
 function Footer() {
   return (
     <footer id="footer">
-      <a href="#">Contact cyf</a>
+      {/* <a href="#">Contact cyf</a>
       <a href="#">FaceBook</a>
-      <a href="#">Insta</a>
+      <a href="#">Insta</a> */}
     </footer>
   );
 }
