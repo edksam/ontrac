@@ -2,7 +2,13 @@ import React from 'react';
 import Main from './components/main'
 import ReactDOM from 'react-dom';
 import './main.css'
+<<<<<<< HEAD
 import './index.css';
+=======
+
+
+
+>>>>>>> zubedauk-main
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
 import PDTracker from './components/PDtracker';

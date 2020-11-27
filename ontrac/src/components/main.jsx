@@ -1006,10 +1006,18 @@ function Container(){
     const [addChange,setChange]=useState(null);
     const [load,setLoad]=useState(null);
     function addFreshFunc(addChange){
+<<<<<<< HEAD
         alert("Thanks. Your data is updated now");
         document.getElementById("main").innerHTML="";
         setChange(addChange);
         setLoad('https://ontrack-team3.herokuapp.com/students');
+=======
+        //alert("thanks.your data is updated now")
+      
+        document.getElementById("main").innerHTML=""
+        setChange(addChange)
+        setLoad('https://ontrack-team3.herokuapp.com/students')
+>>>>>>> zubedauk-main
     }
 
     //this function is used to make refresh data after delete a record
@@ -1051,7 +1059,11 @@ function Header(prop){
                     <a href="www.google.com" class="btn btn-outline-success btnSize">Student</a>
                     <a href="www.google.com" class="btn btn-outline-success btnSize">Attendance</a>
                     <a href="www.google.com" class="btn btn-outline-success btnSize">Education</a>
+<<<<<<< HEAD
                     <a href="" class="btn btn-outline-success btnSize">PD</a>
+=======
+                    <a href="https://cyf-baby-name-picker-zubeda.netlify.app" class="btn btn-outline-success btnSize">PD</a>
+>>>>>>> zubedauk-main
                 </nav>
                 <div  id="search">
                     <li >
@@ -1137,6 +1149,7 @@ function Main(prop){
             });
         }
     ,[prop.cnt,prop])
+<<<<<<< HEAD
 
     //setAdd method is used to on/off the new entry div
     const [add,setAdd]=useState(null);
@@ -1152,6 +1165,113 @@ function Main(prop){
             document.getElementById("addNew").textContent="AddNew";
             document.getElementById("addNew").style.backgroundColor="green";
         }
+=======
+////////////////////setAdd method is used to on/off the new entry div
+const [add,setAdd]=useState(null);
+
+////////////following method is used to on off adButton
+function addCancelFunc(){
+     if(add===null){
+        setAdd("add");
+        document.getElementById("addNew").textContent="X"
+        document.getElementById("addNew").style.backgroundColor="red";
+    }
+    else{
+        setAdd(null)
+        document.getElementById("addNew").textContent="AddNew"
+        document.getElementById("addNew").style.backgroundColor="green";
+    }
+}
+return(
+<main id="main">
+    {/* following button is used to block the addNew component */}
+    <div id="frmAdd">
+        <button type="button" class="btn btn-success" id="addNew" onClick={addCancelFunc}>Add New</button>                      
+    </div>
+   {/* call AddNew component for new entry*/}
+    {add && (<AddNew addCancelFunc={addCancelFunc} addFreshFunc={prop.addFreshFunc}/>)}
+    {edit && (<Edit addFreshFunc={prop.addFreshFunc} editId={edit} editCancelFunc={editCancelFunc}/>)}
+    <table class="table table-striped table-bordered" >
+    <caption>List of users</caption>
+    <thead>
+        <tr>
+        <th scope="col" style={{fontSize:'1.4rem'}}>#</th>
+        <th scope="col" style={{fontSize:'1.4rem'}} >Name</th>
+        <th scope="col" style={{fontSize:'1.4rem'}}>Photo</th>
+        <th scope="col" style={{fontSize:'1.4rem'}}>Edu Buddy</th>
+        <th scope="col" style={{fontSize:'1.4rem'}}>PD Buddy</th>
+        <th scope="col" style={{fontSize:'1.4rem'}}>GitHub</th>
+        <th scope="col" style={{fontSize:'1.4rem'}}>English Test</th>
+        <th scope="col" style={{fontSize:'1.1rem',width:'11.2rem'}}>Language Support</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+    {
+    
+    data.map(function(obj){
+        function testFunc(val){
+            if(val.toLowerCase() ==="no".toLowerCase()){
+                
+                return true;
+            }else{
+                return  false;
+            }
+           
+        }
+        function tLightFunc(val){
+            if(val.toLowerCase()==="good"){
+                return <span style={{color:'orange',fontSize:'1.4rem',fontWeight:'bold',fontStyle:'italic'}}>Good</span>
+            }
+            if(val.toLowerCase()==="excellent"){
+                return <span style={{color:'green',fontSize:'1.4rem',fontWeight:'bold',fontStyle:'italic'}}>Excellent</span>
+            }
+            if(val.toLowerCase()==="poor"){
+                return <span style={{color:'red',fontSize:'1.4rem',fontWeight:'bold',fontStyle:'italic'}}>Poor</span>
+            }
+        }
+        return(<>
+            <tr id={obj.id} key={obj.id}>
+                <th scope="row" key={obj.id} value={obj.id}>{obj.id}</th>
+                <td style={{fontSize:'1.4rem'}} value={obj.name}>{obj.name}</td>
+                <td style={{fontSize:'1.4rem'}} value={obj.photo}>
+                    {
+                        testFunc(obj.photo) ? (<span style={{color:'green',fontSize:'2rem'}}>&#10004;</span>):(<span style={{color:'red',fontSize:'2rem'}}>&#10005;</span>)
+                    }
+                </td>
+                <td style={{fontSize:'1.4rem'}} value={obj.pdBuddy}>{obj.pdBuddy}</td>
+                <td style={{fontSize:'1.4rem'}} value={obj.eduBuddy}>{obj.eduBuddy}</td>
+                <td  value={obj.gitHub}><a style={{fontSize:'1.4rem'}} href="gitHub.com">{obj.gitHub}</a> </td>
+                <td style={{fontSize:'1.4rem'}} value={obj.englishTest}>
+                    {
+                        tLightFunc(obj.englishTest)
+                    }
+                </td>
+                <td style={{fontSize:'1.4rem',textAlign:'center'}} value={obj.languageSupport}>
+                    {
+                        testFunc(obj.languageSupport) ? (<span style={{color:'green',fontSize:'2rem'}}>&#10004;</span>):(<span style={{color:'red',fontSize:'2rem'}}>&#10005;</span>)
+                    }
+                </td>
+                <td id="tdEdit">
+                    <button style={{fontSize:'1.4rem'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnEdit" onClick={editFunc}>Edit</button>
+                </td>
+                <td id="tdDel">
+                    <button  style={{fontSize:'1.4rem',borderColor:'red'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btDel" onClick={delFunc}>X</button>
+                    
+                </td>
+                <td>
+                    
+                   
+                    <a href="./component/StudentProfile.jsx">
+                        <button style={{fontSize:'1.4rem'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnProfile">Profile</button>
+                    </a>
+                </td>
+            </tr>
+        </>)
+    })
+>>>>>>> zubedauk-main
     }
     return(
     <main id="main">
@@ -1330,6 +1450,10 @@ function AddNew(prop){
             <table class="table table-striped table-bordered" >
                 <thead>
                     <tr>
+<<<<<<< HEAD
+=======
+                     
+>>>>>>> zubedauk-main
                         <th scope="col" style={{fontSize:'1.4rem'}}>Name</th>
                         <th scope="col" style={{fontSize:'1.4rem'}}>Photo</th>
                         <th scope="col" style={{fontSize:'1.4rem'}}>Class</th>
@@ -1354,6 +1478,10 @@ function AddNew(prop){
                         </td>
                         <td style={{fontSize:'1.4rem'}}><input style={{width:'10rem'}} placeholder="Enter Class" type="text" name="txtClassName" id="txtClassName" value={className} onChange={function(e){setClassName(e.target.value)}} /></td>
                         <td style={{fontSize:'1.4rem'}}><input style={{width:'10rem'}} placeholder="Enter Location" type="text" name="txtLocation" id="txtLocation" value={location} onChange={function(e){setLocation(e.target.value)}} /></td>
+<<<<<<< HEAD
+=======
+
+>>>>>>> zubedauk-main
                         <td style={{fontSize:'1.4rem'}}><input style={{width:'10rem'}} type="text" placeholder="Enter Edu Buddy" name="txtEdu" value={edu} onChange={function(e){setEdu(e.target.value)}} /></td>
                         <td><input style={{width:'10rem'}} type="text" name="txtPD" value={pd} placeholder="Enter PD Buddy" onChange={function(e){setPD(e.target.value)}} /></td>
                         <td style={{fontSize:'1.2rem'}}><input type="text" name="txtGitHub" placeholder="Enter GitHub ID" value={gitHub} onChange={function(e){setGitHub(e.target.value) }} /></td>
@@ -1365,13 +1493,24 @@ function AddNew(prop){
                             </select>
                         </td>
                         <td style={{fontSize:'1.4rem'}}>
+<<<<<<< HEAD
                             <select name="selectLanguageSupport" onChange={function(e){setLanguageSupport(e.target.value)}}>
+=======
+                            <select name="selectLanguageSupport" onChange={function(e){setLanuageSupport(e.target.value)}}>
+>>>>>>> zubedauk-main
                                 <option style={{fontSize:'1.4rem'}} value="Yes">Yes</option>
                                 <option style={{fontSize:'1.4rem'}} value="No">No</option>
                             </select>
                         </td>
                         <td>
+<<<<<<< HEAD
                             <button style={{fontSize:'1.4rem'}} class="btn btn-success my-2 my-sm-0" onClick={post} id="btnSave">Save</button>
+=======
+                            {/* <form method="post" action="https://progresstracker.glitch.me/students" class="form-inline my-2 my-lg-0" name="frmProfile"> */}
+                                
+                                <button style={{fontSize:'1.4rem'}} class="btn btn-success my-2 my-sm-0" onClick={post} id="btnSave">Save</button>
+                            
+>>>>>>> zubedauk-main
                         </td>
                     </tr>
                 </tbody>
@@ -1421,6 +1560,7 @@ function Edit(prop){
         }
         return true;
     }
+<<<<<<< HEAD
 
     // the following method is used to send new entry to server
     const edit = () => {
@@ -1456,8 +1596,55 @@ function Edit(prop){
                 prop.addFreshFunc(editChange);
             } 
         }
+=======
+   
+    return true;
+}
+//following method is used to send new entry to server
+const edit = () => {
+  
+ 
+    if(validate()){
+        let student = {
+            name: name,
+            photo:photo,
+            pdBuddy:pd,
+            eduBuddy:edu,
+            location:location,
+            className:className,
+            gitHub:gitHub,
+            englishTest:english,
+            languageSupport:languageSupport
+        };
+      
+        const requestEdit = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(student)
+        };
+        var proceed = window.confirm("Saved:Press Ok if You like to add more or press Cancel to finish?");
+        if (proceed) {
+            fetch(`https://ontrack-team3.herokuapp.com/students/${prop.editId}`, requestEdit)
+
+            setName("")
+            setEdu("");
+            setPD("") ;
+            setGitHub(""); 
+            setLocation("")
+            setClassName("")
+          //addFreshFunc={prop.addFreshFunc} editId={edit} editCancelFunc={editCancelFunc}
+         
+          prop.editCancelFunc();
+          
+          prop.addFreshFunc(editChange)
+            //prop.addCancelFunc('https://ontrack-team3.herokuapp.com/students'); 
+        } 
+>>>>>>> zubedauk-main
     }
 //following method is used to send msg to component main to hide the this component
+<<<<<<< HEAD
     return(
         <div id="edit">
             <table class="table table-striped table-bordered" >
@@ -1526,6 +1713,65 @@ function Edit(prop){
                             <button  style={{fontSize:'1.4rem',color:'white',borderColor:'red',backgroundColor:'red',display:'flex'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnCancel" onClick={prop.editCancelFunc}>X</button>
                         </td>
                     </tr>
+=======
+
+return(
+    <div id="edit">
+        <table class="table table-striped table-bordered" >
+            <thead>
+                <tr>
+                 
+                    <th scope="col" style={{fontSize:'1.4rem'}}>Name</th>
+                    <th scope="col" style={{fontSize:'1.4rem'}}>Photo</th>
+                    <th scope="col" style={{fontSize:'1.4rem'}}>Edu Buddy</th>
+                    <th scope="col" style={{fontSize:'1.4rem'}}>PD Buddy</th>
+                    <th scope="col" style={{fontSize:'1.4rem'}}>GitHub</th>
+                    <th scope="col" style={{fontSize:'1.4rem'}}>English Test</th>
+                    <th scope="col" style={{fontSize:'1.1rem'}}>Language Support</th>
+                    <th scope="col" style={{fontSize:'1.4rem'}}>Class</th>
+                    <th scope="col" style={{fontSize:'1.4rem'}}>Location</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>  
+                <tbody>
+                <tr>
+                    <td style={{fontSize:'1.4rem'}}><input style={{width:'15rem'}} placeholder="Enter Name" type="text" name="txtName" id="txtName" onChange={function(e){setName(e.target.value)}} />{document.getElementById(prop.editId).children[1].textContent}</td>
+                    <td style={{fontSize:'1.4rem'}}>
+                        <select name="txtPhoto" onChange={function(e){setPhoto(e.target.value)}} >
+                            <option style={{fontSize:'1.4rem'}} value="yes">Yes</option>
+                            <option style={{fontSize:'1.4rem'}} value="No">No</option>
+                        </select>                        
+                    </td>
+                   
+                    <td style={{fontSize:'1.4rem'}}><input style={{width:'10rem'}} type="text" placeholder="Enter Edu Buddy" name="txtEdu" onChange={function(e){setEdu(e.target.value)}} />{document.getElementById(prop.editId).children[3].textContent}</td>
+                    <td><input style={{width:'10rem'}} type="text" name="txtPD" placeholder="Enter PD Buddy" onChange={function(e){setPD(e.target.value)}} />{document.getElementById(prop.editId).children[4].textContent}</td>
+                    <td style={{fontSize:'1.4rem'}}><input style={{width:'15rem'}} type="text" name="txtGitHub" placeholder="Enter GitHub ID" onChange={function(e){setGitHub(e.target.value) }} />{document.getElementById(prop.editId).children[5].textContent}</td>
+                    <td style={{fontSize:'1.4rem'}}>
+                        <select name="selectEnglishTest" onChange={function(e){setEnglish(e.target.value)}} >
+                            <option style={{fontSize:'1.4rem'}} value="Excellent">Excellent</option>
+                            <option style={{fontSize:'1.4rem'}} value="Good">Good</option>
+                            <option style={{fontSize:'1.4rem'}} value="Poor">Poor</option>
+                        </select>
+                    </td>
+                    <td style={{fontSize:'1.4rem'}}>
+                        <select name="selectLanguageSupport" onChange={function(e){setLanuageSupport(e.target.value)}}>
+                            <option style={{fontSize:'1.4rem'}} value="Yes">Yes</option>
+                            <option style={{fontSize:'1.4rem'}} value="No">No</option>
+                        </select>
+                    </td>
+                    <td style={{fontSize:'1.4rem'}}><input style={{width:'10rem'}} placeholder="Enter Class" type="text" name="txtClassName" id="txtClassName"  onChange={function(e){setClassName(e.target.value)}} /></td>
+                    <td style={{fontSize:'1.4rem'}}><input style={{width:'10rem'}} placeholder="Enter Location" type="text" name="txtLocation" id="txtLocation" onChange={function(e){setLocation(e.target.value)}} /></td>
+
+                    <td>
+                            <button style={{fontSize:'1.4rem'}} class="btn btn-success my-2 my-sm-0" onClick={edit} id="btnSave">Save</button>
+                    </td>
+                    <td>
+                        <button  style={{fontSize:'1.4rem',color:'white',borderColor:'red',backgroundColor:'red',display:'flex'}} class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btnCancel" onClick={prop.editCancelFunc}>X</button>
+                    </td>
+                    
+                </tr>
+>>>>>>> zubedauk-main
                 </tbody>
             </table>
             <hr></hr> 
