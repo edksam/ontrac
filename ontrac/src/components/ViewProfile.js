@@ -1,5 +1,4 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './viewprofile.css';
 import { Drawer, List, Avatar, Divider, Col, Row } from 'antd';
@@ -32,11 +31,11 @@ class ViewProfile extends React.Component {
         <List
           dataSource={[
             {
-              name: 'Berhane',
-            }
+              name: "Berhane",
+            },
           ]}
           bordered
-          renderItem={item => (
+          renderItem={(item) => (
             <List.Item
               key={item.id}
               actions={[
@@ -62,7 +61,10 @@ class ViewProfile extends React.Component {
           onClose={this.onClose}
           visible={this.state.visible}
         >
-          <p className="site-description-item-profile-p" style={{ marginBottom: 24 }}>
+          <p
+            className="site-description-item-profile-p"
+            style={{ marginBottom: 24 }}
+          >
             Student Profile
           </p>
           <p className="site-description-item-profile-p">Personal</p>
@@ -71,7 +73,10 @@ class ViewProfile extends React.Component {
               <DescriptionItem title="Full Name" content="Berhane" />
             </Col>
             <Col span={12}>
-              <DescriptionItem title="Account" content="mail2berhane@gmail.com" />
+              <DescriptionItem
+                title="Account"
+                content="mail2berhane@gmail.com"
+              />
             </Col>
           </Row>
           <Row>
@@ -105,7 +110,10 @@ class ViewProfile extends React.Component {
               <DescriptionItem title="Position" content="Student" />
             </Col>
             <Col span={12}>
-              <DescriptionItem title="Responsibilities" content="Full Stack Developer" />
+              <DescriptionItem
+                title="Responsibilities"
+                content="Full Stack Developer"
+              />
             </Col>
           </Row>
           <Row>
@@ -141,6 +149,16 @@ class ViewProfile extends React.Component {
                 content={
                   <a href="https://github.com/bireworld">
                     https://github.com/bireworld
+                  </a>
+                }
+              />
+            </Col>
+            <Col span={24}>
+              <DescriptionItem
+                title="LinkdIn"
+                content={
+                  <a href="https://linkedin.com/in/tbtworld/">
+                    https://linkedin.com/in/tbtworld/
                   </a>
                 }
               />
